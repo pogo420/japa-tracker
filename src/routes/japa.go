@@ -1,3 +1,5 @@
+// Package contains all route logics.
+// Mostly processing logic pre and post query
 package routes
 
 import (
