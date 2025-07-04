@@ -1,3 +1,5 @@
+// Package for Low leve query access.
+// Currently it leverages gorm api for queries.
 package repository
 
 import (

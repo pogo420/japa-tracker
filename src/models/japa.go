@@ -1,3 +1,5 @@
+// Package contains all DB table structure
+// Currently it leverages gorm api
 package models
 
 import (
