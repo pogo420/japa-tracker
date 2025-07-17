@@ -3,6 +3,7 @@ package main
 import (
 	"japa-tracker/src/config"
 	"japa-tracker/src/db"
+	"japa-tracker/src/logger"
 	"japa-tracker/src/routes"
 	"japa-tracker/src/utils"
 	"net/http"
@@ -18,16 +19,22 @@ func main() {
 	// Initializes config object
 	config.LoadConfig()
 
+	// Initializing logger
+	appLogger := logger.InitializeLogger()
+
 	// Initializing gin
+	appLogger.Debug("Initializing gin")
 	router := gin.Default()
 
 	// Initializing db
+	appLogger.Debug("Initializing db connection")
 	var db_connection db.DbConnection = db.PostgresConnection{}
 	db := db_connection.InitDb()
 
 	// Passing DB to routes via middleware
 	router.Use(func(c *gin.Context) {
 		c.Set("db", db)
+		c.Set("logger", appLogger)
 		c.Next()
 	})
 

@@ -16,10 +16,19 @@ const (
 	Dev  EnvName = "Dev"
 )
 
+// similating enum for Env values
+type LogLevel string
+
+const (
+	Info  LogLevel = "Info"
+	Debug LogLevel = "Debug"
+)
+
 // Config schema/structure
 // In case of new addition, following structure needs to be modified
 type Config struct {
 	Env        EnvName
+	LogLevel   LogLevel
 	DbUser     string
 	DbPassword string
 	DbName     string
@@ -37,6 +46,7 @@ func LoadConfig() {
 	// Creating object
 	AppConfig = Config{
 		Env:        EnvName(os.Getenv("ENV")),
+		LogLevel:   LogLevel(os.Getenv("LOG_LEVEL")),
 		DbUser:     os.Getenv("DB_USER"),
 		DbPassword: os.Getenv("DB_PASSWORD"),
 		DbHost:     os.Getenv("DB_HOST"),
